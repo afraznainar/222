@@ -249,6 +249,26 @@
 
         function reactToPost(postId, emoji) {
             const post = samplePosts.find(p => p.id === postId);
-            post.comments.push(`Reacted with ${
+            post.comments.push(`Reacted with ${emoji}`);
+            renderPosts();
+        }
 
+        function addComment(postId) {
+            const input = document.getElementById(`commentInput${postId}`);
+            const comment = input.value;
+            if (comment) {
+                const post = samplePosts.find(p => p.id === postId);
+                post.comments.push(comment);
+                input.value = ''; // Clear input
+                renderPosts();
+            }
+        }
 
+        function renderPosts() {
+            const postsContainer = document.getElementById('postsContainer');
+            postsContainer.innerHTML = ''; // Clear existing posts
+            loadMorePosts(); // Reload posts to reflect likes and comments
+        }
+    </script>
+</body>
+</html>
